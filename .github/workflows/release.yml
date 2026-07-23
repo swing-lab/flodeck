@@ -47,6 +47,9 @@ jobs:
   publish:
     needs: tag
     if: ${{ inputs.publish }}
+    permissions:
+      id-token: write
+      attestations: write
     uses: ./.github/workflows/publish.yml
     with:
       ref: "v${{ inputs.version }}"
