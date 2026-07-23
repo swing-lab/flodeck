@@ -1,0 +1,73 @@
+[build-system]
+requires = [
+    "setuptools>=80",
+    "setuptools-scm[simple]>=9.2",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flodeck"
+dynamic = ["version"]
+description = "Flow-centric discrete-event simulator."
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [
+    { name = "Mikhail Titov" },
+]
+requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+[project.urls]
+# Homepage = "https://swing-lab.github.io/flodeck/"
+# Documentation = "https://swing-lab.github.io/flodeck/"
+Repository = "https://github.com/swing-lab/flodeck.git"
+Issues = "https://github.com/swing-lab/flodeck/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.15.0",
+]
+docs = [
+    "mkdocs~=1.6",
+    "mkdocs-material~=9.7",
+    "mkdocstrings[python]~=1.0",
+]
+
+[project.scripts]
+flodeck = "flodeck.cli:main"
+
+[tool.setuptools]
+packages = { find = { where = ["src"] } }
+
+[tool.setuptools.package-data]
+flodeck = ["py.typed"]
+
+[tool.setuptools_scm]
+local_scheme = "no-local-version"
+fallback_version = "0.1.0"
+
+[tool.ruff]
+line-length = 80
+
+[tool.ruff.lint]
+select = ["E", "F", "D"]
+ignore = ["D202"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D"]
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["tests/*"]
